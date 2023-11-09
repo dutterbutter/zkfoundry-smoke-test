@@ -47,6 +47,12 @@ jobs:
             target/
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
+      - name: Download Solidity Compiler
+        run: |
+          wget https://github.com/ethereum/solidity/releases/download/${{ matrix.solc_version }}/solc-static-linux
+          chmod +x solc-static-linux
+          sudo mv solc-static-linux /usr/bin/solc
+
       - name: Run smoke test
         run: ./smoke-test.sh
         env:
