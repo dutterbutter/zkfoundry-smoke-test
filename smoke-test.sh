@@ -94,6 +94,9 @@ esac
 
 wait_for_build 30
 
+echo "Building...."
+RUST_LOG=debug "./foundry-zksync/target/release/zkforge" zkbuild &>run.log || fail "zkforge build failed"
+
 echo "Running tests..."
 set +e
 
